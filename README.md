@@ -4,6 +4,8 @@
 
 Vance Forked this from the Angular Quick Start... because this is a quick project. Instructions to run and build your local below.
 
+![screenshot](https://raw.githubusercontent.com/vance/spotify-app/master/vancify.jpg)
+
 
 
 ### Quick start

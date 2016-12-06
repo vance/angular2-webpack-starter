@@ -1,5 +1,8 @@
+# Vancify, The Conceptual Album Connector
 
-Vance Forked this from the Angular Quick Start... because this is a quick project. 
+**Enter two words and it will connect them through album titles on Spotify using a recursive search tactic**
+
+Vance Forked this from the Angular Quick Start... because this is a quick project. Instructions to run and build your local below.
 
 
 

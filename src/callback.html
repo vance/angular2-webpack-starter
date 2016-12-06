@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+Authenticated. One moment...
+
+
+
+<script>
+
+
+    // I made this a simple HTML file because angular2 router is stealing the params.
+    // I haven't used the router long enough to understand the subscription model and why the router removes the params.
+    // I would ideally fix that, but for now I'm just using a simple query param parser to get the token.
+
+    var hashMap = {};
+
+    location.hash.replace(/^#\/?/, '').split('&').forEach(function(kv) {
+        var spl = kv.indexOf('=');
+        if (spl != -1) {
+            hashMap[kv.substring(0, spl)] = decodeURIComponent(kv.substring(spl+1));
+        }
+    });
+
+
+    if (hashMap.access_token) {
+
+        var message = JSON.stringify({
+            type:'access_token',
+            access_token: hashMap.access_token,
+            expires_in: hashMap.expires_in || 0
+        });
+
+        window.opener.postMessage( message, '*');
+        window.close();
+    }
+
+
+</script>
+
+
+</body>
+</html>
+

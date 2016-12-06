@@ -1,40 +1,70 @@
 <div class="card-container">
-  <h1 x-large class="sample-content">Your Content Here</h1>
 
-  <div>
-    For material design components use the <a href="https://github.com/AngularClass/angular2-webpack-starter/tree/material2"><b>material2</b></a> branch
+  <div *ngIf="!loggedIn">
+
+    <h1 x-large class="sample-content">Vancify, the Spotify Visualizer</h1>
+
+    Please login to Spotify and authorize this application.
+
+    <button (click)="onLoginClick()"> LOGIN </button>
+
   </div>
 
-  <hr>
 
-  <div>
-    For hot module reloading run
-    <pre>npm run start:hmr</pre>
-  </div>
 
-  <hr>
+  <div *ngIf="loggedIn">
 
-  <div>
-    <h4>Local State</h4>
+    <div id="username">Welcome, {{user.display_name}}</div>
 
-    <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
 
-      <input
-        [value]="localState.value"
-        (input)="localState.value = $event.target.value"
-        placeholder="Submit Local State to App State"
-        autofocus>
+    <div>
+      <h4>Find connections between two concepts.</h4>
+      <p>Example: cat and dog </p>
 
-      <button md-raised-button color="primary">Submit Value</button>
-    </form>
-    <!--
-        <input type="text" [value]="localState.value" (input)="localState.value = $event.target.value" autofocus>
-        Rather than wiring up two-way data-binding ourselves with [value] and (input)
-        we can use Angular's [(ngModel)] syntax
-        <input type="text" name="textInput" [(ngModel)]="localState.value" autofocus>
-      -->
 
-    <pre>this.localState = {{ localState | json }}</pre>
+      <div class="concept-wrapper">
+
+        <span class="concept-label">First Concept</span> <input  [(ngModel)]="queryInput.search1" name="name" type="text"/>  <br/>
+        <span class="concept-label">Second Concept</span> <input  [(ngModel)]="queryInput.search2" name="name" type="text"/>
+        <br/>
+        <div *ngIf="queryInput.search1.length && queryInput.search2.length " class="controls">
+          <button (click)="search()"> SEARCH </button>
+          <span class="small-link" (click)="restart()"> RESTART </span>
+        </div>
+      </div>
+
+
+
+      <div id="album-inspector" *ngIf="matchingWords">
+
+        <div *ngIf="selectedAlbum">
+
+          <span>
+            <img src="{{selectedAlbum.image}}" class="album-cover"/>
+          </span>
+
+          <span class="album-details">
+            <a href="{{selectedAlbum.href}}">{{selectedAlbum.name}} </a> <br/>
+            By: {{selectedAlbum.artists[0].name}}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="matchingWords">
+        The common word is <b>{{matchingWords.w1}}</b>. From the albums:
+        <br/> {{connectingAlbums.c1.name }} &#x2190; &#x2192; {{connectingAlbums.c2.name}}
+      </div>
+
+
+      <visualizer-force (albumEmitter)="onAlbumSelected($event)" [nodeList]="nodeList" [linkList]="linkList"></visualizer-force>
+
+
+    </div>
+
+
+
 
   </div>
 

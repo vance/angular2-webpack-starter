@@ -18,6 +18,10 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLarge } from './home/x-large';
+import { VisualizerForce } from './visualizer-force';
+
+//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,6 +45,7 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     NoContentComponent,
+    VisualizerForce,
     XLarge
   ],
   imports: [ // import Angular's modules
